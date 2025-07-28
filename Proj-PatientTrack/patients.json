@@ -1,6 +1,5 @@
-[
-  {
-    "id": 1,
+{
+  "PT-001": {
     "name": "Ali Khan",
     "age": 45,
     "gender": "Male",
@@ -12,8 +11,7 @@
     "city": "Karachi",
     "verdict": "Requires regular insulin and dietary monitoring"
   },
-  {
-    "id": 2,
+  "PT-002": {
     "name": "Zara Ahmed",
     "age": 29,
     "gender": "Female",
@@ -25,8 +23,7 @@
     "city": "Lahore",
     "verdict": "Inhaler prescribed, avoid allergens"
   },
-  {
-    "id": 3,
+  "PT-003": {
     "name": "Rehan Sheikh",
     "age": 60,
     "gender": "Male",
@@ -38,8 +35,7 @@
     "city": "Islamabad",
     "verdict": "Blood pressure under control with medication"
   },
-  {
-    "id": 4,
+  "PT-004": {
     "name": "Sana Tariq",
     "age": 34,
     "gender": "Female",
@@ -51,8 +47,7 @@
     "city": "Faisalabad",
     "verdict": "Advised stress management and regular sleep"
   },
-  {
-    "id": 5,
+  "PT-005": {
     "name": "Hamza Yousuf",
     "age": 52,
     "gender": "Male",
@@ -64,4 +59,4 @@
     "city": "Rawalpindi",
     "verdict": "Under observation for possible stent placement"
   }
-]
+}
