@@ -1,0 +1,67 @@
+[
+  {
+    "id": 1,
+    "name": "Ali Khan",
+    "age": 45,
+    "gender": "Male",
+    "contact": "0321-1234567",
+    "diagnosis": "Type 2 Diabetes",
+    "last_visit": "2025-06-15",
+    "height": 172,
+    "weight": 82,
+    "city": "Karachi",
+    "verdict": "Requires regular insulin and dietary monitoring"
+  },
+  {
+    "id": 2,
+    "name": "Zara Ahmed",
+    "age": 29,
+    "gender": "Female",
+    "contact": "0302-8765432",
+    "diagnosis": "Asthma",
+    "last_visit": "2025-07-10",
+    "height": 160,
+    "weight": 58,
+    "city": "Lahore",
+    "verdict": "Inhaler prescribed, avoid allergens"
+  },
+  {
+    "id": 3,
+    "name": "Rehan Sheikh",
+    "age": 60,
+    "gender": "Male",
+    "contact": "0333-6543210",
+    "diagnosis": "Hypertension",
+    "last_visit": "2025-07-20",
+    "height": 175,
+    "weight": 90,
+    "city": "Islamabad",
+    "verdict": "Blood pressure under control with medication"
+  },
+  {
+    "id": 4,
+    "name": "Sana Tariq",
+    "age": 34,
+    "gender": "Female",
+    "contact": "0345-1122334",
+    "diagnosis": "Migraine",
+    "last_visit": "2025-07-25",
+    "height": 165,
+    "weight": 60,
+    "city": "Faisalabad",
+    "verdict": "Advised stress management and regular sleep"
+  },
+  {
+    "id": 5,
+    "name": "Hamza Yousuf",
+    "age": 52,
+    "gender": "Male",
+    "contact": "0311-9988776",
+    "diagnosis": "Coronary Artery Disease",
+    "last_visit": "2025-07-05",
+    "height": 178,
+    "weight": 85,
+    "city": "Rawalpindi",
+    "verdict": "Under observation for possible stent placement"
+  }
+]
