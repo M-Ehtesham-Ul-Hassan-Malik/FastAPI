@@ -15,7 +15,7 @@ class Patient(BaseModel):
     gender: Annotated[Literal['male', 'female', 'others'], Field(..., description="The gender of the patient", example="male")]
     contact: Annotated[str, Field(..., description="The contact number of the patient", example="0345-1234567")]
     diagnosis: Annotated[str, Field(..., description="The diagnosis of the patient", example="Migraine")]
-    last_visit: Annotated[Optional[str], Field(description="The last visit date of the patient", example="2022-01-01")]
+    last_visit: Annotated[str, Field(...,description="The last visit date of the patient", example="2022-01-01")]
     height: Annotated[float, Field(...,gt=0, description="The height of the patient in cms", example=170.5)]
     weight: Annotated[float, Field(...,gt=0, description="The weight of the patient in kgs", example=70.2)]
     city: Annotated[str, Field(..., description="The city of the patient", example="Lahore")]
@@ -31,6 +31,19 @@ class Patient(BaseModel):
     # "weight": 60,
     # "city": "Faisalabad",
     # "verdict": "Advised stress management and regular sleep"
+
+class UpdatePatient(BaseModel):
+    name: Annotated[Optional[str], Field(default=None)]
+    age: Annotated[Optional[int], Field(default=None)]
+    gender: Annotated[Optional[Literal['male', 'female', 'others']], Field(default=None)]
+    contact: Annotated[Optional[str], Field(default=None)]
+    diagnosis: Annotated[Optional[str], Field(default=None)]
+    last_visit: Annotated[Optional[str], Field(default=None)]
+    height: Annotated[Optional[float], Field(default=None)]
+    weight: Annotated[Optional[float], Field(default=None)]
+    city: Annotated[Optional[str], Field(default=None)]
+    verdict: Annotated[Optional[str], Field(default=None)]
+
 
 def load_patient_data():
     with open('patients.json', 'r') as f:
@@ -116,6 +129,42 @@ def add_patient(patient: Patient):
     save_patient_data(data)
 
     return JSONResponse(status_code=201, content={"message": "Patient added successfully"})
+
+
+# update
+@app.put("/update/{patient_id}")
+def update_patient(patient_id: str, update_patient: UpdatePatient):
+
+    # load data
+    data = load_patient_data()
+
+    # check if patient id already exists
+    if patient_id not in data:
+        raise HTTPException(status_code=404, detail="Patient does not exists")
+    
+    # update the patient
+    existing_patient_info = data[patient_id]
+
+    updated_patient_info =  update_patient.model_dump(exclude_unset=True)
+
+    for key, value in updated_patient_info.items():
+        if value is not None:
+            existing_patient_info[key] = value
+
+    
+    existing_patient_info['id'] = patient_id
+    patient_pydantic_object = Patient(**existing_patient_info)
+
+    existing_patient_info = patient_pydantic_object.model_dump(exclude=['id'])
+
+    # add this dict into data
+    data[patient_id] = existing_patient_info
+
+    # save the data
+    save_patient_data(data)
+
+    return JSONResponse(status_code=200, content={"message": "Patient updated successfully"})
+
 
 
 
