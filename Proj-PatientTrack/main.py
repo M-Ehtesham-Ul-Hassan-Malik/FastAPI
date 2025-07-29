@@ -165,11 +165,24 @@ def update_patient(patient_id: str, update_patient: UpdatePatient):
 
     return JSONResponse(status_code=200, content={"message": "Patient updated successfully"})
 
+# delete
+@app.delete("/delete/{patient_id}")
+def delete_patient(patient_id: str):
 
+    # load data
+    data = load_patient_data()
 
+    # check if patient id exist in data or not
+    if patient_id not in data:
+        raise HTTPException(status_code=404, detail="Patient does not exists")
+    
+    # delete the patient
+    del data[patient_id]
 
+    # save the data
+    save_patient_data(data)
 
-
+    return JSONResponse(status_code=200, content={"message": "Patient deleted successfully"})
 
 
 
