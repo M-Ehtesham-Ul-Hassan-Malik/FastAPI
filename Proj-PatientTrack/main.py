@@ -1,15 +1,48 @@
 from fastapi import FastAPI, Path, HTTPException, Query
-import json
+import json 
+from fastapi.responses import JSONResponse
 from typing import Literal
-
+from pydantic import BaseModel, Field
+from typing import Annotated, Optional
 
 app = FastAPI()
+
+class Patient(BaseModel):
+
+    id: Annotated[str, Field(..., description="The ID of the patient", example="PT-001")]
+    name: Annotated[str, Field(..., description="The name of the patient", example="John Doe")]
+    age: Annotated[int, Field(..., description="The age of the patient", example=30, gt=0, lt=120)]
+    gender: Annotated[Literal['male', 'female', 'others'], Field(..., description="The gender of the patient", example="male")]
+    contact: Annotated[str, Field(..., description="The contact number of the patient", example="0345-1234567")]
+    diagnosis: Annotated[str, Field(..., description="The diagnosis of the patient", example="Migraine")]
+    last_visit: Annotated[Optional[str], Field(description="The last visit date of the patient", example="2022-01-01")]
+    height: Annotated[float, Field(...,gt=0, description="The height of the patient in cms", example=170.5)]
+    weight: Annotated[float, Field(...,gt=0, description="The weight of the patient in kgs", example=70.2)]
+    city: Annotated[str, Field(..., description="The city of the patient", example="Lahore")]
+    verdict: Annotated[str, Field(..., description="The verdict of the patient", example="Advised stress management and regular sleep")]
+
+    # "name": "Sana Tariq",
+    # "age": 34,
+    # "gender": "Female",
+    # "contact": "0345-1122334",
+    # "diagnosis": "Migraine",
+    # "last_visit": "2025-07-25",
+    # "height": 165,
+    # "weight": 60,
+    # "city": "Faisalabad",
+    # "verdict": "Advised stress management and regular sleep"
 
 def load_patient_data():
     with open('patients.json', 'r') as f:
         data = json.load(f)
     
     return data
+
+
+def save_patient_data(data):
+    with open('patients.json', 'w') as f:
+        json.dump(data, f)
+
 
 @app.get("/")
 def hello():
@@ -63,3 +96,36 @@ def sort_patients(
         )
 
     return {"sorted_by": sort_by, "order": order, "data": sorted_data}
+
+
+
+@app.post("/add")
+def add_patient(patient: Patient):
+
+    # load existing data
+    data = load_patient_data()
+    
+    # check if the patient already exists
+    if patient.id in data:
+        raise HTTPException(status_code=400, detail="Patient already exists")
+    
+    # add the new patient
+    data[patient.id] = patient.model_dump(exclude=['id'])
+
+    # save the data
+    save_patient_data(data)
+
+    return JSONResponse(status_code=201, content={"message": "Patient added successfully"})
+
+
+
+
+
+
+
+
+
+
+
+
+

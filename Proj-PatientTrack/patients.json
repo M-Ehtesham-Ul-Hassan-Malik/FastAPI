@@ -58,5 +58,17 @@
     "weight": 85,
     "city": "Rawalpindi",
     "verdict": "Under observation for possible stent placement"
+  },
+  "PT-006": {
+    "name": "Kamran Asmat",
+    "age": 30,
+    "gender": "male",
+    "contact": "0311-1234567",
+    "diagnosis": "Obese",
+    "last_visit": "2025-01-01",
+    "height": 170.5,
+    "weight": 84.2,
+    "city": "Islamabad",
+    "verdict": "Advised exercise and regular walk for one hour"
   }
 }
