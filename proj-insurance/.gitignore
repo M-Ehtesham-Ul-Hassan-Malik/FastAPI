@@ -1,0 +1,9 @@
+./_pycache_
+.config/_pycache_
+.model/_pycache_
+.schema/_pycache_
+
+.pyc 
+pyc 
+./pyc
+/.pyc 
